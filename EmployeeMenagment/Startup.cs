@@ -1,7 +1,10 @@
 using EmployeeMenagment.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,8 +31,34 @@ namespace EmployeeMenagment
         {
             services.AddDbContextPool<AppDBContext>(
                 options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnectionExpess")));
-            services.AddMvc(x => x.EnableEndpointRouting = false).AddXmlSerializerFormatters();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<AppDBContext>();
+
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }
+            
+            ).AddXmlSerializerFormatters();
+
             services.AddTransient<IEmployeeRepository, SQLEmployeeRepository>();
+
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Password.RequiredLength = 10;
+            //    options.Password.RequiredUniqueChars = 3;
+            //});
         }
 
         // This method gets called by the runtime.  Use this method to configure the HTTP request pipeline.
@@ -39,8 +68,14 @@ namespace EmployeeMenagment
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
             app.UseStaticFiles();
 
+            app.UseAuthentication();
             //Standard Routing
             app.UseMvcWithDefaultRoute();
             //app.UseMvc(routes =>
