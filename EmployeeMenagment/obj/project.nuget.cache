@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "px3O4mYR+aAjKngBuS5zAP2xteIO5IkjtkrWSY9ut632Qqgxl6Os9+J+tU/vjXN1U7LcNntmN+q/efeBO9tbmA==",
+  "dgSpecHash": "acLuSE4yWbHq/04Pf7v7LkpU32KsO1tf0g0n3doSxf6SSauX0yqQZvE56ChOG860nSOXvmHRVcVnLEUaPHQEQw==",
   "success": true,
   "projectFilePath": "C:\\Users\\kicius\\Documents\\Tutorials\\asptutorial\\EmployeeMenagment\\EmployeeMenagment.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kicius\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\kicius\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.1.11\\microsoft.aspnetcore.authentication.google.3.1.11.nupkg.sha512",
     "C:\\Users\\kicius\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.2\\microsoft.aspnetcore.cryptography.internal.5.0.2.nupkg.sha512",
     "C:\\Users\\kicius\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.2\\microsoft.aspnetcore.cryptography.keyderivation.5.0.2.nupkg.sha512",
     "C:\\Users\\kicius\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
